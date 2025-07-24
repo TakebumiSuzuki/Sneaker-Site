@@ -54,7 +54,7 @@ def create_user():
 
     password_hash = User.create_password_hash(dto.raw_password)
     user = User(username=dto.username, email=dto.email, password=password_hash)
-    user.is_admin = True
+
     db.session.add(user)
     db.session.commit()
     output = ReadUser.model_validate(user).model_dump()
