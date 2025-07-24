@@ -7,6 +7,21 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
+  // ビルド時のベースパスをFlaskの静的ファイルパスに合わせる
+  // これはビルドによって生成される 'dist/index.htmlファイル'の中で、読み込まれるJavaScript（.js）や
+  // CSS（.css）ファイルへのパスの先頭に/static/という文字列を追加するための設定です。
+  base: '/static/',
+
+  build: { // ★★★ 追加（推奨）★★★
+    // ビルド成果物の出力先ディレクトリ
+    outDir: 'dist',
+    // アセット（JS、CSS、画像など）を格納するサブディレクトリ名
+    assetsDir: 'assets',
+    // Flask側でアセットのパスを動的に解決したい場合に便利
+    manifest: true
+  }, // ★★★★★★★★★★★★
+
+
   plugins: [
     vue(),
     vueDevTools(),
